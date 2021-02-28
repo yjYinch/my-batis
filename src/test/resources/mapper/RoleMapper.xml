@@ -1,0 +1,7 @@
+<mapper namespace="com.zyj.batis.mapper.RoleMapper">
+
+    <select id="getRole" paramType="com.zyj.batis.entity.Role" resultType="com.zyj.batis.entity.Role">
+        select
+            id,role_name as roleName,note from role where id=#{id}
+    </select>
+</mapper>
