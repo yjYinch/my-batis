@@ -39,6 +39,7 @@ public class SimpleExecutor implements Executor {
         // 5. 设置参数类型
         String paramType = mappedStatement.getParamType();
         Class<?> classType = getClassType(paramType);
+        // 6. 获取#{}标签里面的参数
         List<ParameterMapping> parameterMappingList = boundSql.getParameterMappingList();
 
         for (int i = 0; i < parameterMappingList.size(); i++) {
@@ -51,11 +52,11 @@ public class SimpleExecutor implements Executor {
             Object o = field.get(params[0]);
             preparedStatement.setObject(i + 1, o);
         }
-        // 6. 执行sql
+        // 7. 执行sql
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        // 7. 封装结果集
-        // 7.1 得到sql标签上的返回类型
+        // 8. 封装结果集
+        // 8.1 得到sql标签上的返回类型
         String resultType = mappedStatement.getResultType();
         Class<?> resultTypeClass = getClassType(resultType);
         List<Object> objects = new ArrayList<>();
