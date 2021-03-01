@@ -44,12 +44,15 @@ public class SimpleExecutor implements Executor {
 
         for (int i = 0; i < parameterMappingList.size(); i++) {
             ParameterMapping parameterMapping = parameterMappingList.get(i);
+            // 获取具体参数
             String content = parameterMapping.getContent();
-            // 反射获取对应的类的变量
+            // 反射获取对应的类的成员变量
             Field field = classType.getDeclaredField(content);
             // 由于参数是private类型，需要设置暴力访问
             field.setAccessible(true);
+            // 获取传参对应的值
             Object o = field.get(params[0]);
+            // 赋值给预编译语句，比如 select id from user where name = '张三' and age = 18
             preparedStatement.setObject(i + 1, o);
         }
         // 7. 执行sql

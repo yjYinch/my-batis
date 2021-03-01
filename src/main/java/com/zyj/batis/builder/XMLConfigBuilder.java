@@ -54,13 +54,16 @@ public class XMLConfigBuilder {
             // 赋值给Configuration
             configuration.setDataSource(druidDataSource);
 
-            // 解析<mapper>标签，得到XxxMapper.xml
-            List<Element> mappersNodes = rootElement.selectNodes("//mapper");
+            // 解析<mappers>标签，<mapper>标签 --> 得到XxxMapper.xml路径
+            List<Element> mappersNodes = rootElement.selectNodes("//mappers");
             for (Element mappersNode : mappersNodes) {
-                // 获取XxxMapper.xml的路径，这里面默认是类路径
-                String mapperXmlPath = mappersNode.attributeValue("resource");
-                InputStream mapperXmlPathStream = Resources.getResourcesAsStream(mapperXmlPath);
-                new XMLMapperBuilder(this.configuration).parseMapper(mapperXmlPathStream);
+                List<Element> list1 = mappersNode.selectNodes("//mapper");
+                for (Element element : list1) {
+                    // 获取XxxMapper.xml的路径，这里面默认是类路径
+                    String mapperXmlPath = element.attributeValue("resource");
+                    InputStream mapperXmlPathStream = Resources.getResourcesAsStream(mapperXmlPath);
+                    new XMLMapperBuilder(this.configuration).parseMapper(mapperXmlPathStream);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
