@@ -50,6 +50,7 @@ public class GenericTokenParser {
                 if (end != -1) {
                     // #{}里面的值
                     String content = text.substring(offset, end);
+                    // 记录#{}里面的值，并返回占位符？
                     builder.append(handler.handlerToken(content));
                     offset = end + closeToken.length();
                 }

@@ -28,6 +28,7 @@ public class MainTest {
             RoleMapper roleMapper = sqlSession.getMapper(RoleMapper.class);
             Role role = new Role();
             role.setId(1);
+            // 反射调用invoke方法
             List<Role> roles = roleMapper.getRole(role);
             System.out.println(roles);
         } catch (IOException e) {

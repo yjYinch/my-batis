@@ -69,7 +69,7 @@ public class DefaultSqlSession implements SqlSession {
                 String className = method.getDeclaringClass().getName();
                 String statementId = className + "." + methodName;
                 Type genericReturnType = method.getGenericReturnType();
-                // 判断是否进行了泛型类型参数化
+                // 判断是否进行了泛型类型参数化，通过判断mapper方法的返回类型来判断它是查询多条数据还是一条数据
                 if (genericReturnType instanceof ParameterizedType) {
                     return selectList(statementId, args);
                 } else {

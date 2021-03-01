@@ -6,7 +6,7 @@ package com.zyj.batis.mapping;
  * @description 参数映射，参数中属性值#{}中的具体值
  */
 public class ParameterMapping {
-    private String content;
+    private final String content;
 
     public ParameterMapping(String content){
         this.content = content;
