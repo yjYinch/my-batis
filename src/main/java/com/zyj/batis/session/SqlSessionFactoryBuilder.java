@@ -20,8 +20,8 @@ public class SqlSessionFactoryBuilder {
      */
     public SqlSessionFactory builder(InputStream in){
         XMLConfigBuilder xmlConfigBuilder = new XMLConfigBuilder();
+        // 解析配置文件"mybatis-config.xml"
         Configuration configuration = xmlConfigBuilder.parseConfig(in);
-        SqlSessionFactory defaultSqlSessionFactory = new DefaultSqlSessionFactory(configuration);
-        return defaultSqlSessionFactory;
+        return new DefaultSqlSessionFactory(configuration);
     }
 }

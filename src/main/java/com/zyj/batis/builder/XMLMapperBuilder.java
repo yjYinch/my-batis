@@ -26,6 +26,7 @@ public class XMLMapperBuilder {
      *
      * @param in
      */
+    @SuppressWarnings("unchecked")
     public void parseMapper(InputStream in) {
         try {
             SAXReader saxReader = new SAXReader();
@@ -36,7 +37,7 @@ public class XMLMapperBuilder {
             String namespace = root.attributeValue("namespace");
             // 获得子标签<select>
             List<Element> selectNodeList = root.selectNodes("//select");
-            // 遍历，然后将mapper中的属性赋值给Configuration
+            // 遍历select，然后将mapper中的属性赋值给Configuration
             for (Element el : selectNodeList) {
                 MappedStatement mappedStatement = new MappedStatement();
                 String id = el.attributeValue("id");
@@ -47,6 +48,7 @@ public class XMLMapperBuilder {
                 mappedStatement.setParamType(paramType);
                 mappedStatement.setResultType(resultType);
                 mappedStatement.setSql(sql);
+                // 唯一标识，存入map中，查询的时候可以根据这个唯一标识来查
                 String keyStatementId = namespace + "." + id;
                 this.configuration.getMappedStatements().put(keyStatementId, mappedStatement);
             }

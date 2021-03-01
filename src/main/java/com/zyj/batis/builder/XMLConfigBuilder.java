@@ -28,10 +28,11 @@ public class XMLConfigBuilder {
     }
 
     /**
-     * 解析配置文件，采用DOM4J解析
+     * 解析配置文件，采用DOM4J解析xml
      * @param in
      * @return
      */
+    @SuppressWarnings("unchecked")
     public Configuration parseConfig(InputStream in){
         try {
             SAXReader saxReader = new SAXReader();
@@ -62,6 +63,7 @@ public class XMLConfigBuilder {
                     // 获取XxxMapper.xml的路径，这里面默认是类路径
                     String mapperXmlPath = element.attributeValue("resource");
                     InputStream mapperXmlPathStream = Resources.getResourcesAsStream(mapperXmlPath);
+                    // 解析"XxxMapper.xml"配置文件
                     new XMLMapperBuilder(this.configuration).parseMapper(mapperXmlPathStream);
                 }
             }

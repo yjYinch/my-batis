@@ -10,7 +10,7 @@ import com.zyj.batis.session.SqlSessionFactory;
  * @description
  */
 public class DefaultSqlSessionFactory implements SqlSessionFactory {
-    private Configuration configuration;
+    private final Configuration configuration;
 
     public DefaultSqlSessionFactory(Configuration configuration){
         this.configuration = configuration;
