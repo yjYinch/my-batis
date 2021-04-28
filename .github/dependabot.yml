@@ -1,0 +1,14 @@
+version: 2
+updates:
+- package-ecosystem: maven
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: com.alibaba:druid
+    versions:
+    - 1.2.5
+  - dependency-name: mysql:mysql-connector-java
+    versions:
+    - 8.0.23
